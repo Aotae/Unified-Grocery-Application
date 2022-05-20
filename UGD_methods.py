@@ -33,7 +33,7 @@ def update(id,value):
 def insert_store(store):
     # inserts one document i.e book into the 'library' collection
     # a document includes information on a book such as title and author as well as a cover image
-    # a document is a dictionary in this form {name:grocery store name, coupon_pointer:grocery store coupon pointer}
+    # a document is a dictionary in this form {store:grocery store name, coupon_pointer:grocery store coupon pointer}
     # POST request
     client = connect()
     db = client["UGD"]
@@ -41,8 +41,8 @@ def insert_store(store):
     collection.insert_one(store)
 
 def delete_store(id):
-    # deletes one document i.e book from the 'library' collection
-    # locates book using id, id should be formatted as a query {name:grocery store name} since we use book names as our book ids
+    # deletes one document i.e book from the 'GroceryStores' collection
+    # locates book using id, id should be formatted as a query {store:grocery store name} since we use book names as our book ids
     # DELETE request
     client = connect()
     db = client["UGD"]
@@ -87,7 +87,7 @@ def get_store_library():
     return collection_array
 
 def User_exists(id):
-    # checks if notes for a certain book exist
+    # checks if notes for a certain user exist
     client = connect()
     db = client["UGD"]
     collection = db["Users"]
@@ -96,6 +96,17 @@ def User_exists(id):
         return True
     else:
         return False
+
+def get_coupons_api(store_id):
+    #TODO: this should connect with the given stores API and try to get coupons
+    # Main function to get coupons from api
+    pass
+def insert_coupons_collection(couponPage):
+    # Document should be formatted s.t {store:storename, coupon:couponobject[]}
+    client = connect()
+    db = client["UGD"]
+    collection = db["Coupon"]
+    collection.insert_one(user)
 
 def delete_user_collection():
     # FOR TESTING PURPOSES HAS NO USE IN DEPLOYMENT UNLESS YOU WANT TO GET RID OF ALL OF YOUR POTENTIAL USERS
