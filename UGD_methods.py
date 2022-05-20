@@ -66,16 +66,16 @@ def get_user_password(id):
     collection = db["Users"]
     return collection.find_one(id)
 
-def get_books(id):
+def get_store(id):
     # gets a book from the 'library' collection according to bookname(id)
     # id should be formatted {book:bookname} as we use booknames as our book ids
     # GET request
     client = connect()
     db = client["UGD"]
-    collection = db["library"]
+    collection = db["GroceryStores"]
     return collection.find_one(id)
 
-def get_library():
+def get_store_library():
      # returns all of the documents in the 'GroceryStores' collection
     collection_array = []
     client = connect()
@@ -97,7 +97,7 @@ def User_exists(id):
     else:
         return False
 
-def delete_note_library():
+def delete_user_collection():
     # FOR TESTING PURPOSES HAS NO USE IN DEPLOYMENT UNLESS YOU WANT TO GET RID OF ALL OF YOUR POTENTIAL USERS
     # WILL DROP ALL OF THE NOTES ASSOCIATED WITH ALL BOOKS
     client = connect()
