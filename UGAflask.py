@@ -10,12 +10,17 @@ app = flask.Flask(__name__)
 @app.route("/login")
 def login():
     return flask.render_template('login.html')
-@app.route("/register",methods=['POST'])
-def store_library():
-    pass
-@app.route("/couponpage",methods=['GET'])
+
+@app.route("/register")
+def register():
+    return flask.render_template('register.html')
+
+@app.route("/store-list")
 def display_coupons():
-    pass
+    return flask.render_template('store-list.html')
+@app.route("/search")
+def display_search():
+    return flask.render_template('search.html')
 
 if __name__ == "__main__":
     app.run(port =5000, host = "0.0.0.0")

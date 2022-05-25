@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Coupons</title>
-    <link rel="stylesheet" href="store-list.css" />
-    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="static/css/store-list.css" />
+    <script src="static/js/main.js"></script>
   </head>
   <body>
     <div class="container">
       <h1>Select from Available Stores</h1>
 
       <div class="group">
-        <input type="checkbox" id="xd" onclick="storeLst('Safeway')"/>
+        <input type="checkbox" id="xd" name="Safeway" onclick="storeLst('Safeway')"/>
         <label for="xd">Safeway</label>
       </div>
 
@@ -28,7 +28,7 @@
       </div>
 
       <div class="buttons">
-      <button class="button" onclick="window.location.href='search.html';">
+      <button class="button" onclick="window.location.href='search';">
         Continue
       </button>
       </div>
