@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
 }
-.search-bar{
+.search_bar{
   margin-bottom: 400px;
   width: 80%;
   max-height: 80%;
@@ -30,7 +30,7 @@
   padding: 2px 20px;
   backdrop-filter: blur(4px) saturate(180%);
 }
-.search-bar input{
+.search_bar input{
   background: transparent;
   flex: 1;
   border: 0;
@@ -44,10 +44,10 @@
   color: white;
 }
 
-.search-bar button img{
+.search_bar button img{
   width: 20px;
 }
-.search-bar button{
+.search_bar button{
   border: 0;
   border-radius: 50%;
   width: 50px;
