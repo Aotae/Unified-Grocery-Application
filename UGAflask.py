@@ -6,6 +6,7 @@ app = flask.Flask(__name__)
 
 # Display webpage functions no AJAX yet, splash page == login page
 # if login successful next splash should be the grocery store library 
+# if 
 @app.route("/")
 @app.route("/login")
 def login():
@@ -16,12 +17,14 @@ def register():
     return flask.render_template('register.html')
 
 @app.route("/store-list")
-def display_coupons():
+def display_store_list():
     return flask.render_template('store-list.html')
 @app.route("/search")
 def display_search():
     return flask.render_template('search.html')
+##########
 # AJAX Handlers should return jsons instead of rendering pages
+##########
 @app.route("/_search")
 def search():
     """
@@ -32,6 +35,12 @@ def search():
     # print(f"keyword={keyword}")
 
     return flask.jsonify({"keyword":keyword})
+@app.route("/_register")
+def register():
+    pass
+@app.route("/_validate")
+def validate():
+    pass
 
 
 if __name__ == "__main__":
