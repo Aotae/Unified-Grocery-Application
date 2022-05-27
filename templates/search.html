@@ -28,24 +28,35 @@
             <input name="search" type="text" placeholder="Search" />
             <button type="submit"><img src="static/css/img/search.png"></button>
         </div>
+        <div class="row">
+            <div class="column">
+                
+            </div>
+        </div>
     </div>
     <script type="text/javascript">
-              var SCRIPT_ROOT = {{ request.script_root| tojson | safe}};
-              var SEARCH_URL = SCRIPT_ROOT + "/_search"
-              function search(keyword) {
-                  console.log(keyword);
-                  $.getJSON(SEARCH_URL, {keyword: keyword }).done(
-                      function (data) {
-                          console.log(keyword);
-                      }
-                  )
-              }
-              $('input[name="search"]').change(
-                  function () {
-                      console.log($(this).val());
-                      var keyword = $(this).val();
-                      search(keyword);
-                  })
+        var SCRIPT_ROOT = {{ request.script_root| tojson | safe}};
+        var SEARCH_URL = SCRIPT_ROOT + "/_search"
+        function search(keyword) {
+            console.log(keyword);
+            $.getJSON(SEARCH_URL, {keyword: keyword }).done(
+                function (data) {
+                    console.log(keyword);
+                }
+            )
+        }
+        $('input[name="search"]').change(
+            function () {
+                console.log($(this).val());
+                var keyword = $(this).val();
+                search(keyword);
+            })
+        $(window).scroll(function () {
+            // End of the document reached?
+            if ($(document).height() - $(this).height() == $(this).scrollTop()) {
+                console.log("We scrolled to the bottom");
+            }
+        });
     </script>
 </body>
   </html>
