@@ -6,7 +6,7 @@
 }
 
 .container{
-  width: 100%;
+  min-width: 100%;
   min-height: 100vh;
   padding: 5%;
 
@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
 }
-.search_bar{
+.search-bar{
   margin-bottom: 400px;
   width: 80%;
   max-height: 80%;
@@ -30,7 +30,7 @@
   padding: 2px 20px;
   backdrop-filter: blur(4px) saturate(180%);
 }
-.search_bar input{
+.search-bar input{
   background: transparent;
   flex: 1;
   border: 0;
@@ -44,10 +44,10 @@
   color: white;
 }
 
-.search_bar button img{
+.search-bar button img{
   width: 20px;
 }
-.search_bar button{
+.search-bar button{
   border: 0;
   border-radius: 50%;
   width: 50px;
