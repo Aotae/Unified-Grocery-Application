@@ -9,11 +9,11 @@ app = flask.Flask(__name__)
 # if 
 @app.route("/")
 @app.route("/login")
-def login():
+def display_login():
     return flask.render_template('login.html')
 
 @app.route("/register")
-def register():
+def display_register():
     return flask.render_template('register.html')
 
 @app.route("/store-list")
@@ -35,6 +35,7 @@ def search():
     # print(f"keyword={keyword}")
 
     return flask.jsonify({"keyword":keyword})
+
 @app.route("/_register")
 def register():
     pass
