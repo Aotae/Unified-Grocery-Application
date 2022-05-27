@@ -57,7 +57,7 @@ label::after {
   content: "";
   border: 2px solid #27ae60;
   width: 24px;
-  height: 24px;  position: absolute;
+  height: 24px;  position: relative;
   left: -42px;
   top: -6px;
   border-radius: 50%;
