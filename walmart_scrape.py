@@ -3,6 +3,7 @@ import json
 from bs4 import BeautifulSoup
 
 def main():
+    # these are the stores in Eugene
     urls = ['https://www.coupons.com/coupons/?pid=25351&nid=10&zid=lm54&storezip=97408',
            'https://www.coupons.com/coupons/?pid=25351&nid=10&zid=lm54&storezip=97402']
 
