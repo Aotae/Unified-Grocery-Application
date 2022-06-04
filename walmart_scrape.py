@@ -2,7 +2,7 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
-def main():
+def get_items():
     # these are the stores in Eugene
     urls = ['https://www.coupons.com/coupons/?pid=25351&nid=10&zid=lm54&storezip=97408',
            'https://www.coupons.com/coupons/?pid=25351&nid=10&zid=lm54&storezip=97402']
@@ -12,7 +12,7 @@ def main():
         soup = BeautifulSoup(r.content, 'html.parser')
         APP_COUPONSINC = soup.find_all('script')[3].text.strip()[21:-1]
         data = json.loads(APP_COUPONSINC)
-        print(formatData(data))
+        return(formatData(data))
 
 
 def getDictionaryFromJsonData(data):
@@ -41,5 +41,3 @@ def formatData(bigData):
         allData.append(newDict)
 
     return allData
-
-main()

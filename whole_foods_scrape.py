@@ -1,5 +1,4 @@
 import requests
-
 cookies = {
     'csm-sid': '637-1450553-2361065',
     '_gcl_au': '1.1.68708868.1654017178',
@@ -13,7 +12,6 @@ cookies = {
     'wfm_store_d8': 'eyJpZCI6IjEwMjk0IiwibmFtZSI6IkV1Z2VuZSIsInRsYyI6IkVVRyIsInBhdGgiOiJldWdlbmUiLCJzdGF0ZSI6Ik9SIiwic3RvcmVfbmlkIjoiIiwic3RhcnRfZGF0ZSI6IjIwMjItMDUtMzFUMTc6MTU6MjkuMDk5WiIsInVwZGF0ZWRfZGF0ZSI6IjIwMjItMDUtMzFUMTc6MTU6MjkuMDk5WiIsImdlb21ldHJ5Ijp7ImNvb3JkaW5hdGVzIjpbLTEyMy4wODc4NjMsNDQuMDUwMTExXSwidHlwZSI6IlBvaW50In19',
     '_gat_UA-190385-1': '1',
 }
-
 headers = {
     'Accept': '*/*',
     'Accept-Language': 'en-US,en;q=0.9',
@@ -28,12 +26,11 @@ headers = {
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
 }
-
 params = {
     'featured': 'on-sale',
     'store': '10294',
     'category': 'all-products',
 }
-
-response = requests.get('https://www.wholefoodsmarket.com/_next/data/TUm8mEYAFTdEvI3m8dk80/products/all-products.json', params=params, cookies=cookies, headers=headers)
-print(response.text)
+def get_items():
+    response = requests.get('https://www.wholefoodsmarket.com/_next/data/TUm8mEYAFTdEvI3m8dk80/products/all-products.json', params=params, cookies=cookies, headers=headers)
+    return response.text

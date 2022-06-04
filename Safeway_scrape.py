@@ -38,7 +38,6 @@ cookies = {
     'SWY_SYND_USER_INFO': '%7B%22storeAddress%22%3A%22%22%2C%22storeZip%22%3A%2294611%22%2C%22storeId%22%3A%223132%22%2C%22preference%22%3A%22J4U%22%7D',
     'mbox': 'PC#dfeb827322304e1884e65804ab57f915.35_0#1716963762|session#2eabb405313149eab47701b61c3c6680#1653720822',
 }
-
 headers = {
     'authority': 'www.safeway.com',
     'accept': 'application/json, text/plain, */*',
@@ -58,5 +57,6 @@ headers = {
 }
 
 #response contains all items in the deals section of Safeway in a JSON format
-response = requests.get('https://www.safeway.com/abs/pub/xapi/search/products?request-id=8218844936810&url=https://www.safeway.com&pageurl=https://www.safeway.com&pagename=search&rows=30&start=0&search-type=keyword&storeid=3132&featured=false&search-uid=uid%253D7272369662816%253Av%253D12.0%253Ats%253D1653280926963%253Ahc%253D5&q=&sort=&userid=&featuredsessionid=&screenwidth=1283&channel=instore&banner=safeway&fq=promoType:%22P%22&fq=inventoryAvailable:%221%22', cookies=cookies, headers=headers)
-
+def get_items():
+    response = requests.get('https://www.safeway.com/abs/pub/xapi/search/products?request-id=8218844936810&url=https://www.safeway.com&pageurl=https://www.safeway.com&pagename=search&rows=30&start=0&search-type=keyword&storeid=3132&featured=false&search-uid=uid%253D7272369662816%253Av%253D12.0%253Ats%253D1653280926963%253Ahc%253D5&q=&sort=&userid=&featuredsessionid=&screenwidth=1283&channel=instore&banner=safeway&fq=promoType:%22P%22&fq=inventoryAvailable:%221%22', cookies=cookies, headers=headers)
+    return response.text

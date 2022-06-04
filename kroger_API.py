@@ -5,6 +5,7 @@ import json
 def get_token():
     '''Function to create a new access token to allow the program to access the API'''
     headers = {
+        # When done testing hide this api key using .env
         'Authorization': 'Basic Y291cG9udW5pZmllci1jZTViYWVlYWViOWE3ZjU5OTMyNDkwZDlhMDRiZDViOTc5MTgwNTEyNDI1NTI2NDQyNDc6aHIxMnpJQnJ4OV9GTzZGS0hFTnhFbUFERThTZXJmdGVqWnBJbDAzZQ==',
     }
 
@@ -44,8 +45,7 @@ def main():
 
     token = get_token()
 
-    item = get_item_detail("", "", token)
+    item = get_item_detail("frozen peas", "", token)
 
-    return
 
 

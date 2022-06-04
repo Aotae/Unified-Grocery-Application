@@ -1,6 +1,8 @@
 import flask
 from flask import request
 import UGD_methods
+import API_server
+import json
 
 app = flask.Flask(__name__)
 
@@ -29,8 +31,8 @@ def search():
     current iteration simply retuns the keywords given
     """
     keyword = request.args.get('keyword',type=str)
-    store = request.args.get('store',type=str)
-    print(f"keyword={keyword}")
+    store = json.loads(request.args.get('store'))
+    couponpage = API_server.get_coupon_page(store)
     # UGD_methods.connect()
     # UGD_methods.get_coupons_api(store)
     return flask.jsonify({"keyword":keyword})

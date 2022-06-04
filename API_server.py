@@ -1,32 +1,35 @@
-import requests
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-def add_coupon_by_id(id, store_id, type):
-	headers = {
-    'SWY_SSO_TOKEN': '<SWY_SSO_TOKEN> jwt',
-    'Content-Type': 'application/json',
-	}
+import kroger_API # Literally the only api that ended up being half useful
+import Safeway_scrape # API wasn't playing nice
+import walmart_scrape # No API
+import whole_foods_scrape # No API
+import UGD_methods
 
-	params = (
-	    ('storeId', store_id),
-	)
-	t = Template('{"items":[{"clipType":"C","itemId":"${id}","itemType":"${type}"},{"clipType":"L","itemId":"${id}","itemType":"${type}"}]}')
-	data = t.substitute(id=str(id), type=str(type))
+def insert_coupons(id):
+    #wrapper for ugd method that uses webscrappers
+    for x in id:
+        if(x == "Whole Foods"):
+            list = whole_foods_scrape.get_items()
+            UGD_methods.insert_coupons_collection({x:list})
+        elif(x == "Walmart"):
+            list = walmart_scrape.get_items()
+            UGD_methods.insert_coupons_collection({x:list})
+        elif(x == "Safeway"):
+            list = Safeway_scrape.get_items()
+            UGD_methods.insert_coupons_collection({x:list})
 
-	response = requests.post('https://www.safeway.com/abs/pub/web/j4u/api/offers/clip', headers=headers, params=params, data=data)
-	print(response.status_code)
-##
-headers = {
-    'Host': 'albertsons.okta.com',
-    'Accept': 'application/json',
-    'Authorization': 'Basic ',
-    'Accept-Encoding': 'gzip, deflate',
-    'Accept-Language': 'en-us',
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'charset': 'utf-8',
-}
+def get_coupon_page(id):
+    #wrapper for the ugd method
+    couponpage = []
+    for x in id:
+        if(x == "Whole Foods"):
+            couponpage.append(UGD_methods.get_coupons(x))
+        elif(x == "Walmart"):
+            couponpage.append(UGD_methods.get_coupons(x))
+        elif(x == "Safeway"):
+            couponpage.append(UGD_methods.get_coupons(x))
+    return couponpage
 
-data = 'username=nathan.ao.pang@gmail.com&password=124523QweDfgBnm&grant_type=password&scope=openid profile offline_access'
+# need seperate function for kroger since it only returns searched items and not their whole catalog.
 
-response = requests.post('https://albertsons.okta.com/oauth2/ausp6soxrIyPrm8rS2p6/v1/token', headers=headers, data=data, verify=False)
-print(response.status_code)
+
+

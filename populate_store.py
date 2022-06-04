@@ -1,6 +1,7 @@
 import UGD_methods
 import sys
 import re
+import API_server
 """
 Use this script to populate the database with sample data
 Written by Nathan Pang
@@ -24,5 +25,12 @@ def main():
 #MDBClient.delete_library()
 #MDBClient.delete_note_library()
 #main()
-UGD_methods.delete_stores();
-insert_library();
+UGD_methods.delete_stores()
+UGD_methods.delete_coupons_collection()
+insert_library()
+array = UGD_methods.get_store_library()
+store_list=[]
+for store in array:
+    store_name = store["name"]
+    store_list.append(store_name)
+API_server.insert_coupons(store_list)

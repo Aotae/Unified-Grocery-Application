@@ -98,22 +98,27 @@ def User_exists(id):
     else:
         return False
 
-def get_coupons_api(store_id):
-    #TODO: this should connect with the given stores API and try to get coupons
-    # Main function to get coupons from given stores api or if the store id doesn't contain a pointer
-    # to their api i.e they don't have one perform a webscrape on their deals webpage.
-    pass
+def get_coupons(store_id):
+    client = connect()
+    db = client["UGD"]
+    collection = db["Coupon"]
+    return collection.find_one(id)
 def insert_coupons_collection(couponPage):
     # Document should be formatted s.t {store:storename, coupon:couponobject[]}
     client = connect()
     db = client["UGD"]
     collection = db["Coupon"]
-    collection.insert_one(user)
-
+    collection.insert_one(couponPage)
 def delete_user_collection():
     # FOR TESTING PURPOSES HAS NO USE IN DEPLOYMENT UNLESS YOU WANT TO GET RID OF ALL OF YOUR POTENTIAL USERS
     # WILL DROP ALL OF THE NOTES ASSOCIATED WITH ALL BOOKS
     client = connect()
     db = client["UGD"]
     collection = db["Users"]
+    collection.drop()
+def delete_coupons_collection():
+    # Document should be formatted s.t {store:storename, coupon:couponobject[]}
+    client = connect()
+    db = client["UGD"]
+    collection = db["Coupon"]
     collection.drop()

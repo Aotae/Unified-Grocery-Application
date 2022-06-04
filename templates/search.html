@@ -66,7 +66,16 @@
         function search(keyword) {
             console.log(keyword);
             // get json from the search url passing in keyword
-            $.getJSON(SEARCH_URL, { keyword: keyword }).done(
+            var stores = []
+            for (let i = 0; i < storeArray.length; i++) {
+                stores.push(storeArray[i]);
+            }
+            console.log(stores);
+            var params = {};
+            params.keyword = keyword;
+            params.store = JSON.stringify(stores);
+            console.log(params);
+            $.getJSON(SEARCH_URL,params).done(
                 //when done getting json use the data returned to do something.
                 function (data) {
                     // should display all the coupons returned
