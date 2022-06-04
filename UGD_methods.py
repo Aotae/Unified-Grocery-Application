@@ -68,8 +68,8 @@ def get_user_password(id):
     return collection.find_one(id)
 
 def get_store(id):
-    # gets a book from the 'library' collection according to bookname(id)
-    # id should be formatted {book:bookname} as we use booknames as our book ids
+    # gets a store from the 'GroceryStores' collection according to store name(id)
+    # id should be formatted {store:storename} as we use booknames as our book ids
     # GET request
     client = connect()
     db = client["UGD"]
@@ -100,7 +100,8 @@ def User_exists(id):
 
 def get_coupons_api(store_id):
     #TODO: this should connect with the given stores API and try to get coupons
-    # Main function to get coupons from api
+    # Main function to get coupons from given stores api or if the store id doesn't contain a pointer
+    # to their api i.e they don't have one perform a webscrape on their deals webpage.
     pass
 def insert_coupons_collection(couponPage):
     # Document should be formatted s.t {store:storename, coupon:couponobject[]}
@@ -113,6 +114,6 @@ def delete_user_collection():
     # FOR TESTING PURPOSES HAS NO USE IN DEPLOYMENT UNLESS YOU WANT TO GET RID OF ALL OF YOUR POTENTIAL USERS
     # WILL DROP ALL OF THE NOTES ASSOCIATED WITH ALL BOOKS
     client = connect()
-    db = client["ARA_books"]
+    db = client["UGD"]
     collection = db["Users"]
     collection.drop()

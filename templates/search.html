@@ -21,6 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
             integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
             crossorigin="anonymous"></script>
+    <script type="text/javascript" src="static/js/main.js"></script>
 </head>
 <body>
     <div class="container">
@@ -29,32 +30,69 @@
             <button type="submit"><img src="static/css/img/search.png"></button>
         </div>
         <div class="row">
-            <div class="column">
-                
+            <div class="group">
+                <input type="checkbox" id="store0" onclick="storeLst('Safeway')" />
+                <label for="store0">store0</label>
+            </div>
+            <div class="group">
+                <input type="checkbox" id="store1" onclick="storeLst('Walmart')" />
+                <label for="store1">store1</label>
+            </div>
+            <div class="group">
+                <input type="checkbox" id="store2" onclick="storeLst('Kroger')" />
+                <label for="store2">store2</label>
+            </div>
+            <div class="group">
+                <input type="checkbox" id="store3" onclick="storeLst('Whole Foods')" />
+                <label for="store3"></label>
             </div>
         </div>
     </div>
     <script type="text/javascript">
         var SCRIPT_ROOT = {{ request.script_root| tojson | safe}};
-        var SEARCH_URL = SCRIPT_ROOT + "/_search"
+        var SEARCH_URL = SCRIPT_ROOT + "/_search";
+        var STORE_LST_URL = SCRIPT_ROOT + "/_storelist";
+        // declaring search function 
+        function get_stores() {
+            $.getJSON(STORE_LST_URL).done(
+                function (data) {
+                    var store_list = data.list;
+                    for (let i = 0; i < store_list.length; i++) {
+                        var store_id = "store" + i;
+                        $("label[for=" + store_id + "]").text(store_list[i]);
+                    }
+                });
+        }
         function search(keyword) {
             console.log(keyword);
-            $.getJSON(SEARCH_URL, {keyword: keyword }).done(
+            // get json from the search url passing in keyword
+            $.getJSON(SEARCH_URL, { keyword: keyword }).done(
+                //when done getting json use the data returned to do something.
                 function (data) {
-                    console.log(keyword);
+                    // should display all the coupons returned
+                    // TODO
+                    var coupons = data.keyword;
+                    console.log(coupons)
                 }
             )
         }
+        get_stores()
         $('input[name="search"]').change(
             function () {
+                // AJAX Interaction when the value in the search bar changes do this 
+                // because this is an AJAX interaction it doesn't refresh the page.
                 console.log($(this).val());
                 var keyword = $(this).val();
+                // search our coupoon database for the new value
                 search(keyword);
             })
         $(window).scroll(function () {
             // End of the document reached?
+            // will be for infinite scroll of coupons
+            // should continue to display coupons until no more are returned
             if ($(document).height() - $(this).height() == $(this).scrollTop()) {
                 console.log("We scrolled to the bottom");
+                //TODO
             }
         });
     </script>
