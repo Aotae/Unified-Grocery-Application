@@ -102,7 +102,8 @@ def get_coupons(store_id):
     client = connect()
     db = client["UGD"]
     collection = db["Coupon"]
-    return collection.find_one(id)
+    #print(collection.find_one({'store':store_id}))
+    return collection.find_one({'store':store_id})
 def insert_coupons_collection(couponPage):
     # Document should be formatted s.t {store:storename, coupon:couponobject[]}
     client = connect()

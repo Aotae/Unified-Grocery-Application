@@ -59,4 +59,5 @@ headers = {
 #response contains all items in the deals section of Safeway in a JSON format
 def get_items():
     response = requests.get('https://www.safeway.com/abs/pub/xapi/search/products?request-id=8218844936810&url=https://www.safeway.com&pageurl=https://www.safeway.com&pagename=search&rows=30&start=0&search-type=keyword&storeid=3132&featured=false&search-uid=uid%253D7272369662816%253Av%253D12.0%253Ats%253D1653280926963%253Ahc%253D5&q=&sort=&userid=&featuredsessionid=&screenwidth=1283&channel=instore&banner=safeway&fq=promoType:%22P%22&fq=inventoryAvailable:%221%22', cookies=cookies, headers=headers)
-    return response.text
+    return response.json()
+
