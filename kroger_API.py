@@ -46,6 +46,4 @@ def main():
     token = get_token()
 
     item = get_item_detail("frozen peas", "", token)
-
-
-
+    print(item)

@@ -3,6 +3,7 @@ from flask import request
 import UGD_methods
 import API_server
 import json
+import sys
 
 app = flask.Flask(__name__)
 
@@ -32,10 +33,12 @@ def search():
     """
     keyword = request.args.get('keyword',type=str)
     store = json.loads(request.args.get('store'))
-    couponpage = API_server.get_coupon_page(store)
+    couponpage = API_server.search_coupon_page(store,keyword)
+    #print(couponpage)
+    #couponpage.append()
     # UGD_methods.connect()
     # UGD_methods.get_coupons_api(store)
-    return flask.jsonify({"keyword":keyword})
+    return flask.jsonify({"coupons":couponpage})
 
 @app.route("/_storelist")
 def display_store_list():

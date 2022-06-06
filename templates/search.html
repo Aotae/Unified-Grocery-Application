@@ -47,6 +47,8 @@
                 <label for="store3"></label>
             </div>
         </div>
+        <div id="grid">
+        </div>
     </div>
     <script type="text/javascript">
         var SCRIPT_ROOT = {{ request.script_root| tojson | safe}};
@@ -80,8 +82,20 @@
                 function (data) {
                     // should display all the coupons returned
                     // TODO
-                    var coupons = data.keyword;
+                    var coupons = data.coupons;
                     console.log(coupons)
+                    let container = document.getElementById("grid");
+                    for (let i = 0; i < coupons[0]['data'].length; i++) {
+                        let cell = document.createElement("div");
+                        console.log(coupons[0]['data'][i]["images"][0]["sizes"][0]["url"]);
+                        let couponimageurl = coupons[0]['data'][i]["images"][0]["sizes"][0]["url"];
+                        let couponimage = document.createElement("img");
+                        couponimage.src = couponimageurl;
+                        cell.appendChild(couponimage);
+                        cell.className = "cell"
+                        container.appendChild(cell);
+                    }
+                    
                 }
             )
         }

@@ -125,4 +125,18 @@ label::after {
         display: block;
     }
     #leftside > button {display:none;}
+    #grid{grid-template-columns:auto auto;}
 }
+#grid{
+    display: grid;
+    position:absolute;
+    top:175px;
+    grid-template-columns: auto auto auto auto auto;
+    grid-gap: 5px;
+}
+.cell{
+    padding:5px;
+    border:1px solid #a6e5fc;
+    background: rgba(236,236,236,0.9);
+}
+
