@@ -46,13 +46,15 @@ def get_coupon_page(id):
     return couponpage
 
 def search_coupon_page(id,keyword):
-    if(id == None):
+    print(id)
+    if(not id):
         array = UGD_methods.get_store_library()
         store_list=[]
         for store in array:
             store_name = store["name"]
             store_list.append(store_name)
         id = store_list
+    print(id)
     page = get_coupon_page(id)
     if(keyword == None):
         return page
@@ -62,11 +64,13 @@ def search_coupon_page(id,keyword):
         for i in x:
             try:
                 key = i['name']
+                print(key)
             except:
                 key = i['details']
-            print(key)
-            if(keyword in key):
-                searchlist.append(i)
+                print(key + " details")
+            if(keyword.lower() in key.lower() or keyword.lower()[:-1] in key.lower()):
+                print(type(key))
+                searchlist.append(key)
     if("Kroger" in id):
         token = kroger_API.get_token()
         a = kroger_API.get_item_detail(keyword,"",token)

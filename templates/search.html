@@ -83,19 +83,32 @@
                     // should display all the coupons returned
                     // TODO
                     var coupons = data.coupons;
-                    console.log(coupons)
+                    console.log(coupons);
                     let container = document.getElementById("grid");
-                    for (let i = 0; i < coupons[0]['data'].length; i++) {
-                        let cell = document.createElement("div");
-                        console.log(coupons[0]['data'][i]["images"][0]["sizes"][0]["url"]);
-                        let couponimageurl = coupons[0]['data'][i]["images"][0]["sizes"][0]["url"];
-                        let couponimage = document.createElement("img");
-                        couponimage.src = couponimageurl;
-                        cell.appendChild(couponimage);
-                        cell.className = "cell"
-                        container.appendChild(cell);
+                    container.innerHTML = "";
+                    for (let x = 0; x < coupons.length; x++) {
+                        try {
+                            console.log(x);
+                            console.log(coupons[x])
+                            for (let i = 0; i < coupons[x]['data'].length; i++) {
+                                let cell = document.createElement("div");
+                                //console.log(coupons[0]['data'][i]["images"][0]["sizes"][0]["url"]);
+                                let couponimageurl = coupons[x]['data'][i]["images"][0]["sizes"][0]["url"];
+                                let couponimage = document.createElement("img");
+                                couponimage.src = couponimageurl;
+                                cell.appendChild(couponimage);
+                                cell.className = "cell";
+                                container.appendChild(cell);
+                            }
+                        } catch {
+                            let cell = document.createElement("div");
+                            let item_name = document.createElement("div")
+                            item_name.innerHTML = coupons[x];
+                            cell.appendChild(item_name);
+                            cell.className = "cell";
+                            container.appendChild(cell);
+                        }
                     }
-                    
                 }
             )
         }
