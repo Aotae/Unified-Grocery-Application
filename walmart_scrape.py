@@ -32,12 +32,17 @@ def formatData(bigData):
     couponDict = getDictionaryFromJsonData(bigData)
     allData = []
     for coupon in couponDict:
+        imageArr = []
         newDict = {}
         productInforamation = couponDict.get(coupon)
         #print(productInforamation["summary"])
         newDict["summary"] = productInforamation["summary"]
         newDict["details"] = productInforamation["details"]
         newDict["brand"] = productInforamation["brand"]
+        imageArr.append(productInforamation["image"]["url"])
+        imageArr.append(productInforamation["image"]["height"])
+        imageArr.append(productInforamation["image"]["width"])
+        newDict["image"] = imageArr
         allData.append(newDict)
 
     return allData
