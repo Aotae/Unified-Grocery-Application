@@ -1,5 +1,6 @@
 import kroger_API # Literally the only api that ended up being half useful
-import Safeway_scrape # API wasn't playing nice
+import Safeway_scrape # couldn't back engineer their API since we didn't have a way to perform a 
+                      # man in the middle attack to get the way they make JWTs
 import walmart_scrape # No API
 import whole_foods_scrape # No API
 import UGD_methods
@@ -54,7 +55,7 @@ def search_coupon_page(id,keyword):
             store_name = store["name"]
             store_list.append(store_name)
         id = store_list
-    print(id)
+    #print(id)
     page = get_coupon_page(id)
     if(keyword == None):
         return page
@@ -63,23 +64,30 @@ def search_coupon_page(id,keyword):
         #print(x)
         for i in x:
             try:
-                key = i['name']
-                print(key)
+                key_item_name = i['name']
+                namestore = 1
+                print(key_item_name + " name")
             except:
-                key = i['details']
-                print(key + " details")
-            if(keyword.lower() in key.lower() or keyword.lower()[:-1] in key.lower()):
-                print(type(key))
-                searchlist.append(key)
+                key_item_name = i['details']
+                couponinfo = {"details":key_item_name,"promo":i["summary"],"image":i['image']}
+                namestore = 0
+                print(key_item_name + " details")
+            if(namestore == 1):
+                try:
+                    price = i['promoDescription']
+                    couponinfo = {"details":key_item_name,"promo":price}
+                except:
+                    fullprice = i['regularPrice']
+                    price = i['salePrice']
+                    couponinfo = {"details":key_item_name,"promo":[price,fullprice],"image":i['imageThumbnail']}
+            if(keyword.lower() in key_item_name.lower() or keyword.lower()[:-1] in key_item_name.lower()):
+                searchlist.append(couponinfo)
+
     if("Kroger" in id):
         token = kroger_API.get_token()
         a = kroger_API.get_item_detail(keyword,"",token)
         searchlist.append(a)
     print(searchlist)
     return searchlist
-                
-
-# need seperate function for kroger since it only returns searched items and not their whole catalog.
-
 
 

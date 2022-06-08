@@ -33,11 +33,18 @@ def formatData(bigData):
     allData = []
     for coupon in couponDict:
         newDict = {}
-        productInforamation = couponDict.get(coupon)
+        productInformation = couponDict.get(coupon)
         #print(productInforamation["summary"])
-        newDict["summary"] = productInforamation["summary"]
-        newDict["details"] = productInforamation["details"]
-        newDict["brand"] = productInforamation["brand"]
+        newDict["summary"] = productInformation["summary"]
+        newDict["details"] = productInformation["details"]
+        newDict["brand"] = productInformation["brand"]
+        newDict["image"] = productInformation["image"]["url"]
         allData.append(newDict)
 
     return allData
+
+def main():
+    a = get_items()
+    print(a)
+
+main()

@@ -137,6 +137,8 @@ label::after {
 .cell{
     padding:5px;
     border:1px solid #a6e5fc;
+    width: 115px;
+    height: auto;
     background: rgba(236,236,236,0.9);
 }
 

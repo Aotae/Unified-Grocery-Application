@@ -26,7 +26,7 @@
 <body>
     <div class="container">
         <div class="search-bar">
-            <input name="search" type="text" placeholder="Search" />
+            <input name="search" id="search" type="text" placeholder="Search" />
             <button type="submit"><img src="../static/css/img/search.png"></button>
         </div>
         <div class="row">
@@ -77,7 +77,7 @@
             params.keyword = keyword;
             params.store = JSON.stringify(stores);
             console.log(params);
-            $.getJSON(SEARCH_URL,params).done(
+            $.getJSON(SEARCH_URL, params).done(
                 //when done getting json use the data returned to do something.
                 function (data) {
                     // should display all the coupons returned
@@ -87,31 +87,63 @@
                     let container = document.getElementById("grid");
                     container.innerHTML = "";
                     for (let x = 0; x < coupons.length; x++) {
-                        try {
+                        if (coupons[x]['image'] != null) {
                             console.log(x);
-                            console.log(coupons[x])
-                            for (let i = 0; i < coupons[x]['data'].length; i++) {
+                            //console.log(coupons[x]);
+                            let cell = document.createElement("div");
+                            let imgcell = document.createElement("div");
+                            let details = document.createElement("div");
+                            details.innerHTML = coupons[x]["details"];
+                            details.innerText = details.innerText + " " + coupons[x]["promo"];
+                            let couponimageurl = coupons[x]['image'];
+                            console.log(couponimageurl);
+                            let couponimage = document.createElement("img");
+                            couponimage.src = couponimageurl;
+                            couponimage.style.width = '75px';
+                            couponimage.style.height = '75px';
+                            imgcell.appendChild(couponimage);
+                            imgcell.style.width = '75px';
+                            imgcell.style.height = '75px';
+                            cell.appendChild(imgcell);
+                            cell.appendChild(details);
+                            cell.className = "cell";
+                            container.appendChild(cell);
+                        } else {
+                            if (coupons[x]['data'] != null) {
+                                for (let i = 0; i < coupons[x]['data'].length; i++) {
+                                    let cell = document.createElement("div");
+                                    let imgcell = document.createElement("div");
+                                    let details = document.createElement("div");
+                                    var promo = coupons[x]['data'][i]["items"][0]["price"]["promo"];
+                                    var regular = coupons[x]['data'][i]["items"][0]["price"]["regular"];
+                                    details.innerText = "Promo:" + promo + " Regular:" + regular;
+                                    console.log(coupons[x]['data'][i]["images"][0]["sizes"][0]["url"]);
+                                    let couponimageurl = coupons[x]['data'][i]["images"][0]["sizes"][0]["url"];
+                                    let couponimage = document.createElement("img");
+                                    couponimage.src = couponimageurl;
+                                    couponimage.style.width = '75px';
+                                    couponimage.style.height = '75px';
+                                    imgcell.appendChild(couponimage);
+                                    imgcell.style.width = '75px';
+                                    imgcell.style.height = '75px';
+                                    cell.appendChild(imgcell);
+                                    cell.appendChild(details);
+                                    cell.className = "cell";
+                                    container.appendChild(cell);
+                                }
+                            } else {
                                 let cell = document.createElement("div");
-                                //console.log(coupons[0]['data'][i]["images"][0]["sizes"][0]["url"]);
-                                let couponimageurl = coupons[x]['data'][i]["images"][0]["sizes"][0]["url"];
-                                let couponimage = document.createElement("img");
-                                couponimage.src = couponimageurl;
-                                cell.appendChild(couponimage);
+                                let details = document.createElement("div");
+                                details.innerHTML = coupons[x]["details"];
+                                details.innerText = details.innerText + " " + coupons[x]["promo"];
+                                cell.appendChild(details);
                                 cell.className = "cell";
                                 container.appendChild(cell);
                             }
-                        } catch {
-                            let cell = document.createElement("div");
-                            let item_name = document.createElement("div")
-                            item_name.innerHTML = coupons[x];
-                            cell.appendChild(item_name);
-                            cell.className = "cell";
-                            container.appendChild(cell);
                         }
                     }
-                }
-            )
-        }
+                });
+            }
         get_stores()
         $('input[name="search"]').change(
             function () {
@@ -119,6 +151,14 @@
                 // because this is an AJAX interaction it doesn't refresh the page.
                 console.log($(this).val());
                 var keyword = $(this).val();
+                // search our coupoon database for the new value
+                search(keyword);
+            })
+        $('input[type="checkbox"]').change(
+            function () {
+                // AJAX Interaction when the value in the search bar changes do this 
+                // because this is an AJAX interaction it doesn't refresh the page.
+                var keyword = $("#search").val();
                 // search our coupoon database for the new value
                 search(keyword);
             })

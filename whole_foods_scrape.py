@@ -34,3 +34,13 @@ params = {
 def get_items():
     response = requests.get('https://www.wholefoodsmarket.com/_next/data/TUm8mEYAFTdEvI3m8dk80/products/all-products.json', params=params, cookies=cookies, headers=headers)
     return response.json()
+
+def main():
+    a = get_items()
+    a = a['pageProps']
+    a = a['data']
+    a = a['results']
+    print(a)
+
+#main()
+
