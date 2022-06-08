@@ -27,9 +27,6 @@ Simply follow the installation wizard and mark install as a service to be true.
     Create the data/db folder, this is where Mongodb will store its data that we insert.
     We can do this using sudo 'mkdir' with option -p call the folder /data/db
     Check if it was created using 'cd'
-    ```sh
-    sudo chown <user-name> /data/db
-    ```
   #### 4.
     Next we will change the permissions of the directory using 'chown'
     ```sh
