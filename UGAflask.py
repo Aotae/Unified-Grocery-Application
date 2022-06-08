@@ -14,12 +14,15 @@ app = flask.Flask(__name__)
 @app.route("/")
 @app.route("/login")
 def display_login():
+    # renders the login page
     return flask.render_template('login.html')
 @app.route("/register")
 def display_register():
+    # renders the register page
     return flask.render_template('register.html')
 @app.route("/search")
 def display_search():
+    # renders the search page
     return flask.render_template('search.html')
 
 ##########
@@ -30,19 +33,21 @@ def search():
     """
     this should search the database for a product by keyword.
     current iteration simply retuns the keywords given
+
+    search html page -> request -> flask server answers
+    request should be formatted s.t store = [] (list of stores), keyword = search keyword.
     """
     keyword = request.args.get('keyword',type=str)
     store = json.loads(request.args.get('store'))
     couponpage = API_server.search_coupon_page(store,keyword)
     #print(couponpage)
     #couponpage.append()
-    # UGD_methods.connect()
-    # UGD_methods.get_coupons_api(store)
     return flask.jsonify({"coupons":couponpage})
 
 @app.route("/_storelist")
 def display_store_list():
     # returns the entire list of stores in the collection
+    # This simply grabs the stores from our store collection and updates the html with them.
     UGD_methods.connect()
     list = UGD_methods.get_store_library()
     store_list = []
@@ -53,6 +58,9 @@ def display_store_list():
     return flask.jsonify({"list":store_list})
 
 @app.route("/_register")
+
+##STRETCH GOAL FUNCTIONS
+##DEPRECATED SINCE WE COULDN'T GET ACCESS TO MOST GROCERY STORES API
 def register():
     """
     this should insert the users credentials into the db

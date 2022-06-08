@@ -8,14 +8,14 @@ Database functions for the Unified Grocery Store Database.
 
 #connects to the mongodb database and checks to see if its valid.
 def connect():
-    #for now just local
+    #for now just local connection
     client = pymongo.MongoClient("mongodb://localhost:27017")
     if not client:
         raise Exception('bad connection with db')
     return client
 
 def insert_user(user):
-    # inserts one document into the 'note-library' collection
+    # inserts one document into the 'Users' collection
     # a document includes a User's Username and Password.
     # POST request 
     client = connect()
@@ -32,9 +32,10 @@ def update(id,value):
     collection.update_one(id,{"$set":value})
 
 def insert_store(store):
-    # inserts one document i.e book into the 'library' collection
+    # inserts one document i.e book into the 'Grocery Stores' collection
     # a document includes information on a book such as title and author as well as a cover image
     # a document is a dictionary in this form {store:grocery store name, coupon_pointer:grocery store coupon pointer}
+    # should be done weekly since coupons rotate on a week by week basis
     # POST request
     client = connect()
     db = client["UGD"]
@@ -59,7 +60,7 @@ def delete_stores():
     collection.drop()
 
 def get_user_password(id):
-    # gets the notes from the 'note-library' collection according to bookname(id)
+    # gets the users_password from the 'Users' collection according to bookname(id)
     # id should be formatted {User:Username} as we use usernames as our ids
     # GET request
     client = connect()
@@ -77,7 +78,7 @@ def get_store(id):
     return collection.find_one(id)
 
 def get_store_library():
-     # returns all of the documents in the 'GroceryStores' collection
+    # returns all of the documents in the 'GroceryStores' collection
     collection_array = []
     client = connect()
     db = client["UGD"]
@@ -112,13 +113,14 @@ def insert_coupons_collection(couponPage):
     collection.insert_one(couponPage)
 def delete_user_collection():
     # FOR TESTING PURPOSES HAS NO USE IN DEPLOYMENT UNLESS YOU WANT TO GET RID OF ALL OF YOUR POTENTIAL USERS
-    # WILL DROP ALL OF THE NOTES ASSOCIATED WITH ALL BOOKS
+    # WILL DROP ALL OF THE USERS
     client = connect()
     db = client["UGD"]
     collection = db["Users"]
     collection.drop()
 def delete_coupons_collection():
-    # Document should be formatted s.t {store:storename, coupon:couponobject[]}
+    # DROPS THE ENTIRE COUPON COLLECTION
+    # Should be done weekly since coupons rotate on a week by week basis
     client = connect()
     db = client["UGD"]
     collection = db["Coupon"]
