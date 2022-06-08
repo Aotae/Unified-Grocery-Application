@@ -17,21 +17,10 @@ SELECT On-premises -> <Newest Version> -> <Your OS> -> <Your Prefered Arhiving f
 ### a. If you are on Windows.
 Simply follow the installation wizard and mark install as a service to be true.
 ### b. If you are on Mac and have Homebrew installed:
-  1.
-  Go to the terminal and extract MongoDB from your archive that we downloaded (by default this should be your downloads folder)
-  2.
-  Move the extracted folder to your local binary storage do this using sudo mv <folder_name> /usr/local/mongodb, this will ask for a password
-  To check if we succesfully moved the folder simply go to your local binary store and use 'ls'
-  Change directories to /usr/local/mongodb using 'cd'
-  3.
-  Create the data/db folder, this is where Mongodb will store its data that we insert.
-  We can do this using sudo 'mkdir' with option -p call the folder /data/db
-  Check if it was created using 'cd'
-  4.
-  Next we will change the permissions of the directory using 'chown'
-  ```sh
+  1.  Go to the terminal and extract MongoDB from your archive that we downloaded (by default this should be your downloads folder)  2.  Move the extracted folder to your local binary storage do this using sudo mv <folder_name> /usr/local/mongodb, this will ask for a password  To check if we succesfully moved the folder simply go to your local binary store and use 'ls'  Change directories to /usr/local/mongodb using 'cd'  3.  Create the data/db folder, this is where Mongodb will store its data that we insert.  We can do this using sudo 'mkdir' with option -p call the folder /data/db  Check if it was created using 'cd'  4.  Next we will change the permissions of the directory using 'chown'  ```sh
   sudo chown <user-name> /data/db
   ```
+  
   
   
   
