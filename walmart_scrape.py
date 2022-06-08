@@ -42,9 +42,3 @@ def formatData(bigData):
         allData.append(newDict)
 
     return allData
-
-def main():
-    a = get_items()
-    print(a)
-
-main()
