@@ -94,7 +94,12 @@
                             let imgcell = document.createElement("div");
                             let details = document.createElement("div");
                             details.innerHTML = coupons[x]["details"];
-                            details.innerText = details.innerText + " " + coupons[x]["promo"];
+                            if(coupons[x]["promo"].length == 2){
+                                details.innerText = details.innerText + " " + "Promo:" + coupons[x]["promo"][0]+" Regular:" + coupons[x]["promo"][1];
+                            } else {
+                                details.innerText = details.innerText + " " + coupons[x]["promo"];
+                            }
+                            
                             let couponimageurl = coupons[x]['image'];
                             console.log(couponimageurl);
                             let couponimage = document.createElement("img");
