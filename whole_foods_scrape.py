@@ -1,4 +1,5 @@
 import requests
+#cookies that are used for the request funciton
 cookies = {
     'csm-sid': '637-1450553-2361065',
     '_gcl_au': '1.1.68708868.1654017178',
@@ -12,6 +13,7 @@ cookies = {
     'wfm_store_d8': 'eyJpZCI6IjEwMjk0IiwibmFtZSI6IkV1Z2VuZSIsInRsYyI6IkVVRyIsInBhdGgiOiJldWdlbmUiLCJzdGF0ZSI6Ik9SIiwic3RvcmVfbmlkIjoiIiwic3RhcnRfZGF0ZSI6IjIwMjItMDUtMzFUMTc6MTU6MjkuMDk5WiIsInVwZGF0ZWRfZGF0ZSI6IjIwMjItMDUtMzFUMTc6MTU6MjkuMDk5WiIsImdlb21ldHJ5Ijp7ImNvb3JkaW5hdGVzIjpbLTEyMy4wODc4NjMsNDQuMDUwMTExXSwidHlwZSI6IlBvaW50In19',
     '_gat_UA-190385-1': '1',
 }
+#headers that are used for the request funcion
 headers = {
     'Accept': '*/*',
     'Accept-Language': 'en-US,en;q=0.9',
@@ -26,15 +28,18 @@ headers = {
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': '"Windows"',
 }
+#parameters that are used by the request function
 params = {
     'featured': 'on-sale',
     'store': '10294',
     'category': 'all-products',
 }
+
+#Use this function to get product details from Whole Foods
 def get_items():
     response = requests.get('https://www.wholefoodsmarket.com/_next/data/TUm8mEYAFTdEvI3m8dk80/products/all-products.json', params=params, cookies=cookies, headers=headers)
     return response.json()
-
+#USED FOR TESTING
 def main():
     a = get_items()
     a = a['pageProps']
