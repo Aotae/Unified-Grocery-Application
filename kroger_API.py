@@ -13,7 +13,7 @@ def get_token():
         'grant_type': 'client_credentials',
         'scope': 'product.compact',
     }
-
+    #sends a request to the kroger API that sends back a authentication token
     response = requests.post('https://api.kroger.com/v1/connect/oauth2/token', headers=headers, data=data)
     result = json.loads(response.text)
     return result["access_token"]
@@ -33,7 +33,7 @@ def get_item_detail(item: str, brand: str, token: str):
         'filter.term': item,
         'filter.locationId': '70100328'
     }
-
+    #Sends a GET request to the kroger API that sends back product details
     response = requests.get('https://api.kroger.com/v1/products', params=params, headers=headers)
 
 
@@ -41,9 +41,4 @@ def get_item_detail(item: str, brand: str, token: str):
     return result
 
 
-def main():
 
-    token = get_token()
-
-    item = get_item_detail("frozen peas", "", token)
-    print(item)
